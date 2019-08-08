@@ -1,0 +1,25 @@
+trigger:
+- master
+
+jobs:
+- job: mac_pulsar_37_wheel_10_13
+  pool:
+    vmImage: 'macos-10.13'
+  steps:
+  - bash: ./build.sh
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: './pulsar/pulsar-client-cpp/python/dist'
+      ArtifactName: 'wheel_files'
+      publishLocation: 'Container'
+
+- job: mac_pulsar_37_wheel_10_14
+  pool:
+    vmImage: 'macos-10.14'
+  steps:
+  - bash: ./build.sh
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: './pulsar/pulsar-client-cpp/python/dist'
+      ArtifactName: 'wheel_files'
+      publishLocation: 'Container'

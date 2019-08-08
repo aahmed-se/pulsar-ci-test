@@ -1,0 +1,81 @@
+name: CI
+on: push
+
+jobs:
+  macos_python:
+    name: Build macOS-10.14 python 3.7 artifacts
+    runs-on: macOS-10.14
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: build pulsar python mac packages
+        run: |
+          ./build.sh
+          mkdir artifact-zip
+          find . -name "*.whl"
+          mv ./pulsar/pulsar-client-cpp/python/dist/pulsar_client-2.5.0-cp37-cp37m-macosx_10_14_x86_64.whl pulsar_client-2.5.0-cp37-cp37m-macosx_10_14_x86_64.whl
+ 
+      - uses: actions/upload-artifact@master
+        name: upload python-artifacts
+        with:
+          name: python-artifacts
+          path: pulsar_client-2.5.0-cp37-cp37m-macosx_10_14_x86_64.whl
+
+  windows_python:
+    name: Build win 64 python 3.7 artifacts
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+
+      - name: Install Dependencies
+        env:
+          VCPKG_ROOT: 'C:\vcpkg'
+        shell: powershell
+        run: |
+          vcpkg install --triplet x64-windows jsoncpp, openssl, zstd, snappy, protobuf, dlfcn-win32, curl
+          vcpkg install --triplet x64-windows boost-regex, boost-system, boost-program-options, boost-asio, boost-date-time, boost-serialization, boost-circular-buffer
+          vcpkg install --triplet x64-windows boost-xpressive, boost-python, boost-format, boost-dynamic-bitset, boost-property-tree boost-accumulators
+          vcpkg integrate install
+
+      - name: build pulsar windows x64 and python packages
+        env:
+          VCPKG_ROOT: 'C:\vcpkg'
+        shell: cmd
+        run: |
+          git clone https://github.com/apache/pulsar
+          cd pulsar\pulsar-client-cpp
+          cmake -DCMAKE_GENERATOR_PLATFORM=x64 -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake -DBUILD_TESTS=OFF -DBUILD_PYTHON_WRAPPER=OFF . 
+          cmake --build . --target _pulsar
+          cd python
+          python3 setup.py install
+          
+      # - uses: actions/upload-artifact@master
+      #   name: upload python-artifacts
+      #   with:
+      #     name: python-artifacts
+      #     path: artifacts.zip
+
+
+      # name: Build Linux
+      # runs-on: ubuntu-latest
+      # steps:
+      #   - uses: actions/checkout@master
+      #     with:
+      #       fetch-depth: 1
+
+      # - name: package artifacts
+      #   run: |
+      #     rm -rf artifacts
+      #     mkdir artifacts
+      #     find . -type d -name "*surefire*" -exec cp --parents -R {} artifacts/ \;
+      #     zip -r artifacts.zip artifacts
+          
+      # - uses: actions/upload-artifact@master
+      #   name: upload surefire-artifacts
+      #   with:
+      #     name: surefire-artifacts
+      #     path: artifacts.zip
