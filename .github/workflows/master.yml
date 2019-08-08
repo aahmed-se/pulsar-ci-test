@@ -9,13 +9,13 @@ on:
 jobs:
   build_macos:
     name: Build MacOS
-    runs-on: macos-release
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@master
       with:
         fetch-depth: 1
 
-    - name: build pulsar mac libararied
+    - name: build pulsar python mac libararies
       run: |
         build.sh
