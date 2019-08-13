@@ -1,26 +1,23 @@
-on: release
 name: Handle Release
+on: release
 
 # ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl
 # ./python/dist/pulsar_client-2.4.0-cp27-cp27m-macosx_10_14_x86_64.whl
 
 jobs:
-  build_macos_10_14:
+  pubish_macos_10_14:
     name: Build macOS-10_14
     runs-on: macOS-10.14
-
     steps:
     - uses: actions/checkout@master
-    - name: checkout pulsar
+    - name: checkout repo
       with:
         fetch-depth: 1
-
     - name: cat build.sh
       run: |
         cat build.sh
-
-    - uses: JasonEtco/upload-to-release@master
     - name: Upload build.sh
+    - uses: JasonEtco/upload-to-release@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
