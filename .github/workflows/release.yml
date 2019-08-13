@@ -15,6 +15,10 @@ jobs:
       with:
         fetch-depth: 1
 
+    - name: cat build.sh
+      run: |
+        cat build.sh
+
     - uses: JasonEtco/upload-to-release@master
     - name: Upload build.sh
       env:
