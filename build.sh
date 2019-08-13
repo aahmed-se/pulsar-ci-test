@@ -54,7 +54,6 @@ brew link --force python@2
 brew link --force boost-python
 
 cmake . -DBUILD_TESTS=OFF \
-		# -DLINK_STATIC=ON  \
 		-DPYTHON_LIBRARY=/usr/local/Cellar/python@2/2.7.16/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib \
 		-DPYTHON_INCLUDE_DIR=/usr/local/Cellar/python@2/2.7.16/Frameworks/Python.framework/Versions/2.7/include
 make _pulsar -j8
@@ -71,7 +70,6 @@ brew link --force boost-python3
 make clean
 rm CMakeCache.txt
 cmake . -DBUILD_TESTS=OFF \
-		# -DLINK_STATIC=ON  \
 		-DPYTHON_LIBRARY=/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib \
         -DPYTHON_INCLUDE_DIR=/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/include
 make _pulsar -j8
