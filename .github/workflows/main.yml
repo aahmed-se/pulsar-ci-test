@@ -18,4 +18,4 @@ jobs:
 
     - name: build pulsar python mac libraries
       run: |
-        build.sh
+        ./build.sh
