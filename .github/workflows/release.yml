@@ -8,9 +8,9 @@ jobs:
   pubish_macos_10_14:
     name: Build macOS-10_14
     runs-on: macOS-10.14
+    
     steps:
     - uses: actions/checkout@master
-    - name: checkout repo
       with:
         fetch-depth: 1
 
