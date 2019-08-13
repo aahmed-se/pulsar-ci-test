@@ -1,0 +1,56 @@
+# name: Handle Release
+# on: release
+
+# # ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl
+# # ./python/dist/pulsar_client-2.4.0-cp27-cp27m-macosx_10_14_x86_64.whl
+
+# jobs:
+#   pubish_macos_10_14:
+#     name: Build macOS-10_14
+#     runs-on: macOS-10.14
+
+#     steps:
+#     - uses: actions/checkout@master
+#       with:
+#         fetch-depth: 1
+
+#     - name: cat build.sh
+#       run: |
+#         cat build.sh
+
+#     - uses: JasonEtco/upload-to-release@master
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       with:
+#         args: 'build.sh'
+
+#     # - name: build pulsar macOS-10.14 python mac libraries
+#     #   run: |
+#     #     ./build.sh
+
+#     # - uses: JasonEtco/upload-to-release@master
+#     # - name: Upload python 2
+#     #   env:
+#     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     #   with:
+#     #     args: 'python/dist/pulsar_client-2.4.0-cp27-cp27m-macosx_10_14_x86_64.whl'
+
+#     # - uses: JasonEtco/upload-to-release@master
+#     # - name: Upload python 3
+#     #   env:
+#     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     #   with:
+#     #     args: 'python/dist/pulsar_client-2.4.0-cp27-cp27m-macosx_10_14_x86_64.whl'
+
+# # jobs:
+# #   upload:
+# #     name: Upload
+# #     runs-on: ubuntu-latest
+# #     steps:
+# #     - uses: actions/checkout@master
+# #     - name: Upload
+# #       uses: skx/github-action-publish-binaries@master
+# #       env:
+# #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# #       with:
+# #         args: '*-*'
