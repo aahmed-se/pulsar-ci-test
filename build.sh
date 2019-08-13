@@ -32,7 +32,7 @@ brew install wget cmake pkg-config openssl zstd boost boost-python boost-python3
 wget http://curl.haxx.se/download/curl-7.65.3.tar.gz
 tar -xvzf curl-7.65.3.tar.gz 
 cd curl-7.65.3
-./configure --with-darwinssl
+./configure --with-ssl=/usr/local/opt/openssl
 make install
 
 cd ..
