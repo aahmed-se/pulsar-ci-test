@@ -29,8 +29,9 @@ cd pulsar/pulsar-client-cpp
 
 brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
 
-export LDFLAGS="-L/usr/local/opt/zlib/lib"
-export CPPFLAGS="-I/usr/local/opt/zlib/include"
+# export LDFLAGS="-L/usr/local/opt/zlib/lib"
+# export CPPFLAGS="-I/usr/local/opt/zlib/include"
+export CMAKE_PREFIX_PATH=/usr/local/opt/zlib/
 
 brew link --force boost
 
