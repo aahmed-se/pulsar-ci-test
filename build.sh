@@ -27,7 +27,7 @@ rm -rf pulsar
 git clone -q --depth 1 --branch $GIT_TAG $GIT_REPO
 cd pulsar/pulsar-client-cpp
 
-brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf
+brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
 
 brew link --force boost
 
