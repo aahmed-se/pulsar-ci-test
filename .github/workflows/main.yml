@@ -7,15 +7,28 @@ on:
     - master
 
 jobs:
-  build_macos:
-    name: Build MacOS
-    runs-on: macos-latest
+  build_macos_10.14:
+    name: Build macOS-10.14
+    runs-on: macOS-10.14
 
     steps:
     - uses: actions/checkout@master
       with:
         fetch-depth: 1
 
-    - name: build pulsar python mac libraries
+    - name: build pulsar macOS-10.14 python mac libraries
+      run: |
+        ./build.sh
+
+  build_macos_10.13:
+    name: Build macOS-10.13
+    runs-on: macOS-10.13
+
+    steps:
+    - uses: actions/checkout@master
+      with:
+        fetch-depth: 1
+
+    - name: build pulsar macOS-10.13 python mac libraries
       run: |
         ./build.sh
