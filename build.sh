@@ -20,22 +20,26 @@
 
 set -e -x
 
-GIT_REPO=https://github.com/aahmed-se/incubator-pulsar.git
-GIT_TAG=master
+# GIT_REPO=https://github.com/aahmed-se/incubator-pulsar.git
+# GIT_TAG=master
+
+GIT_REPO=https://github.com/apache/pulsar
+GIT_TAG=v2.4.0
 
 rm -rf pulsar
 git clone -q --depth 1 --branch $GIT_TAG $GIT_REPO pulsar
 cd pulsar/pulsar-client-cpp
 
-brew install wget cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
+# brew install wget
+brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
 
-wget http://curl.haxx.se/download/curl-7.65.3.tar.gz
-tar -xvzf curl-7.65.3.tar.gz 
-cd curl-7.65.3
-./configure --with-ssl=/usr/local/opt/openssl
-make install
+# wget http://curl.haxx.se/download/curl-7.65.3.tar.gz
+# tar -xvzf curl-7.65.3.tar.gz 
+# cd curl-7.65.3
+# ./configure --with-ssl=/usr/local/opt/openssl
+# make install
 
-cd ..
+# cd ..
 
 export CMAKE_PREFIX_PATH="/usr/local/opt/zlib"
 
@@ -48,8 +52,9 @@ brew link --force python@2
 brew link --force boost-python
 
 cmake . -DBUILD_TESTS=OFF \
-		-DLINK_STATIC=ON  \
-		-DPYTHON_LIBRARY=/usr/local/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib
+		# -DLINK_STATIC=ON  \
+		-DPYTHON_LIBRARY=/usr/local/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib \
+		-DPYTHON_INCLUDE_DIR=/usr/local/Frameworks/Python.framework/Versions/2.7/include/python2.7
 make _pulsar -j8
 pushd python
 python2 setup.py bdist_wheel
@@ -64,7 +69,7 @@ brew link --force boost-python3
 make clean
 rm CMakeCache.txt
 cmake . -DBUILD_TESTS=OFF \
-		-DLINK_STATIC=ON  \
+		# -DLINK_STATIC=ON  \
 		-DPYTHON_LIBRARY=/usr/local/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib \
         -DPYTHON_INCLUDE_DIR=/usr/local/Frameworks/Python.framework/Versions/3.7/include/python3.7m
 make _pulsar -j8
