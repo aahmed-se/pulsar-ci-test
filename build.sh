@@ -27,7 +27,15 @@ rm -rf pulsar
 git clone -q --depth 1 --branch $GIT_TAG $GIT_REPO pulsar
 cd pulsar/pulsar-client-cpp
 
-brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
+brew install wget cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
+
+wget http://curl.haxx.se/download/curl-7.65.3.tar.gz
+tar -xvzf curl-7.65.3.tar.gz 
+cd curl-7.65.3
+./configure --with-darwinssl
+make install
+
+cd ..
 
 export CMAKE_PREFIX_PATH="/usr/local/opt/zlib"
 
