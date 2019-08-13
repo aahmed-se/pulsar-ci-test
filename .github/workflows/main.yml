@@ -7,8 +7,8 @@ on:
     - master
 
 jobs:
-  build_macos_10.14:
-    name: Build macOS-10.14
+  build_macos_10_14:
+    name: Build macOS-10_14
     runs-on: macOS-10.14
 
     steps:
@@ -20,8 +20,8 @@ jobs:
       run: |
         ./build.sh
 
-  build_macos_10.13:
-    name: Build macOS-10.13
+  build_macos_10_13:
+    name: Build macOS-10_13
     runs-on: macOS-10.13
 
     steps:
