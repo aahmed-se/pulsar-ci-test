@@ -8,7 +8,7 @@ jobs:
   pubish_macos_10_14:
     name: Build macOS-10_14
     runs-on: macOS-10.14
-    
+
     steps:
     - uses: actions/checkout@master
       with:
@@ -19,7 +19,6 @@ jobs:
         cat build.sh
 
     - uses: JasonEtco/upload-to-release@master
-    - name: Upload build.sh
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
