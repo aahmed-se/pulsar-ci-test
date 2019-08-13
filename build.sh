@@ -55,8 +55,8 @@ brew link --force boost-python
 
 cmake . -DBUILD_TESTS=OFF \
 		# -DLINK_STATIC=ON  \
-		-DPYTHON_LIBRARY=/usr/local/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib \
-		-DPYTHON_INCLUDE_DIR=/usr/local/Frameworks/Python.framework/Versions/2.7/include/python2.7
+		-DPYTHON_LIBRARY=/usr/local/Cellar/python@2/2.7.16/Frameworks/Python.framework/Versions/2.7/lib/libpython2.7.dylib \
+		-DPYTHON_INCLUDE_DIR=/usr/local/Cellar/python@2/2.7.16/Frameworks/Python.framework/Versions/2.7/include
 make _pulsar -j8
 pushd python
 python2 setup.py bdist_wheel
@@ -72,8 +72,8 @@ make clean
 rm CMakeCache.txt
 cmake . -DBUILD_TESTS=OFF \
 		# -DLINK_STATIC=ON  \
-		-DPYTHON_LIBRARY=/usr/local/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib \
-        -DPYTHON_INCLUDE_DIR=/usr/local/Frameworks/Python.framework/Versions/3.7/include/python3.7m
+		-DPYTHON_LIBRARY=/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/lib/libpython3.7.dylib \
+        -DPYTHON_INCLUDE_DIR=/usr/local/Cellar/python/3.7.4/Frameworks/Python.framework/Versions/3.7/include
 make _pulsar -j8
 pushd python
 python3 setup.py bdist_wheel
