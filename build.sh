@@ -31,7 +31,7 @@ git clone -q --depth 1 --branch $GIT_TAG $GIT_REPO pulsar
 cd pulsar/pulsar-client-cpp
 
 # brew install wget
-brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
+brew install python python@2 cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
 
 # wget http://curl.haxx.se/download/curl-7.65.3.tar.gz
 # tar -xvzf curl-7.65.3.tar.gz 
@@ -44,6 +44,8 @@ brew install cmake pkg-config openssl zstd boost boost-python boost-python3 prot
 export CMAKE_PREFIX_PATH="/usr/local/opt/zlib"
 
 brew link --force boost
+
+# ls -l /usr/lib/
 
 # Python 2
 brew unlink python
