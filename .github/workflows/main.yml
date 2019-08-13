@@ -20,15 +20,15 @@ jobs:
       run: |
         ./build.sh
 
-  build_macos_10_13:
-    name: Build macOS-10_13
-    runs-on: macOS-10.13
+  # build_macos_10_13:
+  #   name: Build macOS-10_13
+  #   runs-on: macOS-10.13
 
-    steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 1
+  #   steps:
+  #   - uses: actions/checkout@master
+  #     with:
+  #       fetch-depth: 1
 
-    - name: build pulsar macOS-10.13 python mac libraries
-      run: |
-        ./build.sh
+  #   - name: build pulsar macOS-10.13 python mac libraries
+  #     run: |
+  #       ./build.sh

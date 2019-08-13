@@ -20,16 +20,16 @@
 
 set -e -x
 
-GIT_REPO=https://github.com/apache/pulsar.git
-GIT_TAG=v2.4.0
+GIT_REPO=https://github.com/aahmed-se/incubator-pulsar.git
+GIT_TAG=master
 
 rm -rf pulsar
 git clone -q --depth 1 --branch $GIT_TAG $GIT_REPO
 cd pulsar/pulsar-client-cpp
 
-brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib curl-openssl
+brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
 
-export CMAKE_PREFIX_PATH="/usr/local/opt/zlib:/usr/local/opt/curl-openssl:/usr/local/opt/openldap:/usr/local/opt/openssl:/usr/local/opt/libssh2:/usr/local/opt/brotli"
+export CMAKE_PREFIX_PATH="/usr/local/opt/zlib"
 
 brew link --force boost
 
