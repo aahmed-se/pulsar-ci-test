@@ -24,7 +24,7 @@ GIT_REPO=https://github.com/aahmed-se/incubator-pulsar.git
 GIT_TAG=master
 
 rm -rf pulsar
-git clone -q --depth 1 --branch $GIT_TAG $GIT_REPO
+git clone -q --depth 1 --branch $GIT_TAG $GIT_REPO pulsar
 cd pulsar/pulsar-client-cpp
 
 brew install cmake pkg-config openssl zstd boost boost-python boost-python3 protobuf zlib
