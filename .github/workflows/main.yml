@@ -16,6 +16,6 @@ jobs:
       with:
         fetch-depth: 1
 
-    - name: build pulsar python mac libararies
+    - name: build pulsar python mac libraries
       run: |
         build.sh
