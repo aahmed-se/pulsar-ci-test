@@ -26,7 +26,7 @@ jobs:
         ./build.sh
 
     - name: Upload
-        env:
-          TAG: $([[ ${{github.ref}} =~ ^refs/tags/(.+) ]] && ${BASH_REMATCH[1]})
-          SIZE: $(stat -c %s ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl)
-        run: 'curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" -H "Content-Type: application/zip" --upload-file ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/tag/${TAG}/assets?name=pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl'
+      env:
+        TAG: $([[ ${{github.ref}} =~ ^refs/tags/(.+) ]] && ${BASH_REMATCH[1]})
+        SIZE: $(stat -c %s ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl)
+      run: 'curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" -H "Content-Type: application/zip" --upload-file ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/tag/${TAG}/assets?name=pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl'
