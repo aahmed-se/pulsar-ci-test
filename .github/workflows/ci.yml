@@ -20,7 +20,7 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         env:
           TAG: $([[ ${{github.ref}} =~ ^refs/tags/(.+) ]] && ${BASH_REMATCH[1]})
-          SIZE: $(stat -c %s build.sh)
+          SIZE: "$(stat -f%z build.sh)"
         run: |
           echo TAG : $TAG
           echo SIZE : $SIZE
