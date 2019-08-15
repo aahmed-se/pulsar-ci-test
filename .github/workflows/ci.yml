@@ -17,11 +17,9 @@ jobs:
         run: echo "$GITHUB_CONTEXT" && echo "$GITHUB_REF"
   
       - name: Upload
-        with:
-          GITHUB_WRITE_TOKEN: ${{ secrets.GITHUB_WRITE_TOKEN }}
+        if: startsWith(github.ref, 'refs/tags/v')
         env:
           GITHUB_WRITE_TOKEN: ${{ secrets.GITHUB_WRITE_TOKEN }}
-        if: startsWith(github.ref, 'refs/tags/v')
         run: |
           SIZE=$(stat -f%z build.sh)
           TAG=$(echo $GITHUB_REF | cut -d'/' -f 3)
