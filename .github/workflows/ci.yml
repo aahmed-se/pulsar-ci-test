@@ -22,8 +22,8 @@ jobs:
           TAG: $([[ ${{github.ref}} =~ ^refs/tags/(.+) ]] && ${BASH_REMATCH[1]})
           SIZE: $(stat -c %s build.sh)
         run: |
-          echo TAG : ${TAG}
-          echo SIZE : ${SIZE}
+          echo TAG : $TAG
+          echo SIZE : $SIZE
 
 # - name: build pulsar ${{ matrix.os }} python mac libraries
 #   run: |
