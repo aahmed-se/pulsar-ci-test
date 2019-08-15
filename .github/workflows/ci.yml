@@ -21,8 +21,8 @@ jobs:
         run: |
           SIZE=$(stat -f%z build.sh)
           TAG=$(echo $GITHUB_REF | cut -d'/' -f 3)
-          echo "TAG : $(TAG)"
-          echo "SIZE : $(SIZE)"
+          echo "TAG : $TAG"
+          echo "SIZE : $SIZE"
           FILE=build.sh
           curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" "Content-Type: $(file -b --mime-type $FILE)" --upload-file --data-binary @$FILE "https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/$TAG/assets?name=$(basename $FILE)"
 
