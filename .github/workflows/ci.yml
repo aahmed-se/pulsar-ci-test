@@ -17,6 +17,10 @@ jobs:
         run: echo "$GITHUB_CONTEXT" && echo "$GITHUB_REF"
   
       - name: Upload
+        with:
+          GITHUB_WRITE_TOKEN: ${{ secrets.GITHUB_WRITE_TOKEN }}
+        env:
+          GITHUB_WRITE_TOKEN: ${{ secrets.GITHUB_WRITE_TOKEN }}
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
           SIZE=$(stat -f%z build.sh)
@@ -24,7 +28,7 @@ jobs:
           echo "TAG : $TAG"
           echo "SIZE : $SIZE"
           FILE=build.sh
-          curl -H "Authorization: token $GITHUB_TOKEN" -H "Content-Type: $(file -b --mime-type $FILE)" --data-binary @$FILE "https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/$TAG/assets?name=$(basename $FILE)"
+          curl -H "Authorization: token $GITHUB_WRITE_TOKEN" -H "Content-Type: $(file -b --mime-type $FILE)" --data-binary @$FILE "https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/$TAG/assets?name=$(basename $FILE)"
 
 # - name: build pulsar ${{ matrix.os }} python mac libraries
 #   run: |
