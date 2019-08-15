@@ -1,5 +1,5 @@
 name: CI
-on: push
+on: release
 
 jobs:
   publish:
@@ -19,8 +19,14 @@ jobs:
       - name: Upload
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          echo "TAG : $(echo $GITHUB_REF | cut -d'/' -f 3)"
-          echo "SIZE : $(stat -f%z build.sh)"
+          SIZE=$(stat -f%z build.sh)
+          TAG=$(echo $GITHUB_REF | cut -d'/' -f 3)
+          echo "TAG : $(TAG)"
+          echo "SIZE : $(SIZE)"
+          FILE=build.sh
+          curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" "Content-Type: $(file -b --mime-type $FILE)" --upload-file --data-binary @$FILE "https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/$TAG/assets?name=$(basename $FILE)"
+
+
 
 # - name: build pulsar ${{ matrix.os }} python mac libraries
 #   run: |
