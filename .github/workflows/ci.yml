@@ -5,8 +5,8 @@ on: [push]
 jobs:
   build:
     name: Build macOS macOS-10.14
-    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: macOS-10.14
+    if: startsWith(github.ref, 'refs/tags/v')
     # name: Build macOS ${{ matrix.os }}
     # runs-on: ${{ matrix.os }}
     # strategy:
@@ -14,29 +14,29 @@ jobs:
     #     os: [macOS-10.14]
 
     steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 1
-
-    - name: Dump GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT" && echo "$GITHUB_REF"
-
-    # - name: build pulsar ${{ matrix.os }} python mac libraries
-    #   run: |
-    #     ./build.sh
-
-    # - name: Upload
-    #   env:
-    #     TAG: $([[ ${{github.ref}} =~ ^refs/tags/(.+) ]] && ${BASH_REMATCH[1]})
-    #     SIZE: $(stat -c %s ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl)
-    #   if: startsWith(github.ref, 'refs/tags/v')
-    #   run: 'curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" -H "Content-Type: application/zip" --upload-file ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/tag/${TAG}/assets?name=pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl'
-
-    - name: Upload
-      env:
-        TAG: $([[ ${{github.ref}} =~ ^refs/tags/v(.+) ]] && ${BASH_REMATCH[1]})
-        SIZE: $(stat -c %s build.sh)
-      run: "echo ${TAG}"
-      # run: 'curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" -H "Content-Type: application/zip" --upload-file ./build.sh https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/tag/${TAG}/assets?name=build.sh'
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+  
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: echo "$GITHUB_CONTEXT" && echo "$GITHUB_REF"
+  
+      # - name: build pulsar ${{ matrix.os }} python mac libraries
+      #   run: |
+      #     ./build.sh
+  
+      # - name: Upload
+      #   env:
+      #     TAG: $([[ ${{github.ref}} =~ ^refs/tags/(.+) ]] && ${BASH_REMATCH[1]})
+      #     SIZE: $(stat -c %s ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl)
+      #   if: startsWith(github.ref, 'refs/tags/v')
+      #   run: 'curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" -H "Content-Type: application/zip" --upload-file ./python/dist/pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/tag/${TAG}/assets?name=pulsar_client-2.4.0-cp37-cp37m-macosx_10_14_x86_64.whl'
+  
+      - name: Upload
+        env:
+          TAG: $([[ ${{github.ref}} =~ ^refs/tags/v(.+) ]] && ${BASH_REMATCH[1]})
+          SIZE: $(stat -c %s build.sh)
+        run: "echo ${TAG}"
+        # run: 'curl -sSL -XPOST -H "Authorization: token $GITHUB_TOKEN" -H "Content-Size: $SIZE" -H "Content-Type: application/zip" --upload-file ./build.sh https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/tag/${TAG}/assets?name=build.sh'
