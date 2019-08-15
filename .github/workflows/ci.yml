@@ -18,15 +18,30 @@ jobs:
   
       - name: Upload
         if: startsWith(github.ref, 'refs/tags/v')
-        env:
-          GITHUB_WRITE_TOKEN: ${{ secrets.GITHUB_WRITE_TOKEN }}
+        # env:
+        #   GITHUB_WRITE_TOKEN: ${{ secrets.GITHUB_WRITE_TOKEN }}
         run: |
-          SIZE=$(stat -f%z build.sh)
-          TAG=$(echo $GITHUB_REF | cut -d'/' -f 3)
-          echo "TAG : $TAG"
-          echo "SIZE : $SIZE"
-          FILE=build.sh
-          curl -H "Authorization: token $GITHUB_WRITE_TOKEN" -H "Content-Type: $(file -b --mime-type $FILE)" --data-binary @$FILE "https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/$TAG/assets?name=$(basename $FILE)"
+          mkdir artifact-zip
+          cp build.sh artifact-zip/
+
+      - uses: actions/upload-artifact@master
+        name: Upload ZIP
+        with:
+          name: macos .zip
+          path: artifact-zip
+
+
+      # - name: Upload
+      #   if: startsWith(github.ref, 'refs/tags/v')
+      #   env:
+      #     GITHUB_WRITE_TOKEN: ${{ secrets.GITHUB_WRITE_TOKEN }}
+      #   run: |
+      #     SIZE=$(stat -f%z build.sh)
+      #     TAG=$(echo $GITHUB_REF | cut -d'/' -f 3)
+      #     echo "TAG : $TAG"
+      #     echo "SIZE : $SIZE"
+      #     FILE=build.sh
+      #     curl -H "Authorization: token $GITHUB_WRITE_TOKEN" -H "Content-Type: $(file -b --mime-type $FILE)" --data-binary @$FILE "https://uploads.github.com/repos/aahmed-se/pulsar-ci-test/releases/$TAG/assets?name=$(basename $FILE)"
 
 # - name: build pulsar ${{ matrix.os }} python mac libraries
 #   run: |
